@@ -19,6 +19,27 @@ struct node {
 	struct node *next;
 };
 
+typedef struct node * NODE;
+
 int linkedListMedian(struct node *head) {
-	return -1;
+	NODE fast, slow;
+	if (head == NULL)
+		return -1;
+	else if (head->next == NULL)
+		return head->num;
+	else if (head->next->next == NULL)
+		return (int)((head->num + head->next->num) / 2);
+	else {
+		fast = slow = head;
+		while (fast != NULL){
+			if (fast->next != NULL)
+				fast = fast->next->next;
+			else break;
+			if (fast != NULL)
+				slow = slow->next;
+		}
+		if (fast == NULL)
+			return (int)((slow->num + (slow->next->num)) / 2);
+		else return slow->num;
+	}
 }

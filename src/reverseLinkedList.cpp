@@ -18,6 +18,27 @@ struct node {
 	struct node *next;
 };
 
+typedef struct node *NODE;
+
 struct node * reverseLinkedList(struct node *head) {
-	return NULL;
+	if (head == NULL)
+		return NULL;
+	else if (head->next == NULL)
+		return head;
+	else {
+		NODE temp1 = head, temp2, temp3 = NULL;
+
+		while (temp1 != NULL){
+			temp2 = temp1->next;
+			temp1->next = temp3;
+			temp3 = temp2->next;
+			temp2->next = temp1;
+			if (temp3 == NULL)
+				return temp2;
+			else
+				temp1 = temp3->next;
+			temp3->next = temp2;
+		}
+		return temp3;
+	}
 }

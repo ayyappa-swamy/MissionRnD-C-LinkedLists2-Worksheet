@@ -18,6 +18,23 @@ struct node {
 	struct node *next;
 };
 
+typedef struct node* NODE;
+
 struct node * merge2LinkedLists(struct node *head1, struct node *head2) {
-	return NULL;
+	NODE mergedList;
+	if (head1 == NULL)
+		return head2;
+	else if (head2 == NULL)
+		return head1;
+	else {
+		if (head1->num <= head2->num){
+			mergedList = head1;
+			mergedList->next = merge2LinkedLists(head1->next, head2);
+		}
+		else {
+			mergedList = head2;
+			mergedList->next = merge2LinkedLists(head1, head2->next);
+		}
+	}
+	return mergedList;
 }
